@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Agent Rankings: Benchmarks, Pricing &amp; Comparisons | AgentRankings.ai</title>
+<meta name="description" content="Independent, daily-updated rankings of autonomous AI agents for coding, support, sales, research and operations. Compare scores, pricing, pros and cons.">
+<link rel="canonical" href="https://agentrankings.ai/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agentrankings.ai/">
+<meta property="og:title" content="AI Agent Rankings | AgentRankings.ai">
+<meta property="og:description" content="Which AI agent should you actually hire? Daily rankings on task success, reliability, speed and cost.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0A0F1F">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0A0F1F',
+          panel: '#111933',
+          raised: '#18224A',
+          line: '#24305A',
+          text: '#E7ECF8',
+          muted: '#8A97BC',
+          signal: '#3CE6F6',
+          partner: '#B49CFF',
+          up: '#4ADE80',
+          down: '#FB7185'
+        },
+        fontFamily: { sans: ['Geist', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] }
+      }
+    }
+  };
+</script>
+<style>
+  :root { color-scheme: dark; box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 80px); scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(60,230,246,.08), transparent 60%),
+      radial-gradient(900px 400px at -10% 10%, rgba(180,156,255,.07), transparent 60%),
+      #0A0F1F;
+    font-feature-settings: "tnum" 1, "ss01" 1;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+  /* The signal meter: 20 segments, the one loud element on the page */
+  .meter { display: grid; grid-template-columns: repeat(20, 1fr); gap: 2px; width: 100%; max-width: 160px; height: 10px; }
+  .meter span { border-radius: 1px; background: #1E2850; }
+  .meter span.on { background: #3CE6F6; box-shadow: 0 0 6px rgba(60,230,246,.55); }
+  .meter span.half { background: linear-gradient(90deg, #3CE6F6 50%, #1E2850 50%); }
+  .bar { height: 4px; border-radius: 2px; background: #1E2850; overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: #3CE6F6; }
+  .row-top td:first-child { position: relative; }
+  .row-top td:first-child::before { content: ""; position: absolute; left: 0; top: 18%; bottom: 18%; width: 2px; background: #3CE6F6; box-shadow: 0 0 10px #3CE6F6; }
+  :focus-visible { outline: 2px solid #3CE6F6; outline-offset: 2px; border-radius: 4px; }
+  .chips::-webkit-scrollbar { display: none; }
+  .sticky-head { position: sticky; top: env(safe-area-inset-top, 0px); }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: rgba(10,15,31,.85); backdrop-filter: blur(12px); }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+  @keyframes pulse-dot { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+  .live { animation: pulse-dot 2.4s ease-in-out infinite; }
+</style>
+</head>
+<body class="text-text font-sans antialiased min-h-screen">
+
+<div id="sample-banner" class="hidden border-b border-partner/30 bg-partner/10 text-partner text-sm">
+  <div class="max-w-6xl mx-auto px-5 py-2">Demo data. These agents and scores are placeholders until the data pipeline goes live.</div>
+</div>
+
+<header class="sticky-head z-50 border-b border-line/70 bg-ink/85 backdrop-blur-md">
+  <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
+    <a href="/" class="flex items-baseline gap-0.5 text-lg font-bold tracking-tight">
+      <span>AgentRankings</span><span class="text-muted font-medium">.ai</span>
+    </a>
+    <nav class="hidden sm:flex items-center gap-7 text-sm text-muted">
+      <a href="#leaderboard" class="hover:text-text">Leaderboard</a>
+      <a href="#methodology" class="hover:text-text">Methodology</a>
+      <a href="#disclosure" class="hover:text-text">Disclosure</a>
+    </nav>
+    <div class="flex items-center gap-2 text-xs text-muted">
+      <span class="live inline-block w-2 h-2 rounded-full bg-signal shadow-[0_0_8px_#3CE6F6]"></span>
+      <span>Updated <time id="updated" class="text-text num">–</time></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="max-w-6xl mx-auto px-5 pt-14 pb-8 sm:pt-20">
+    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-[-0.035em] leading-[1.02] max-w-3xl">Which AI agent should you actually hire?</h1>
+    <p class="mt-5 text-lg text-muted max-w-2xl leading-relaxed">Autonomous agents ranked on task success, reliability, speed and cost. Scores and prices refresh every day, so you compare what the agent does today, not what the launch post promised.</p>
+    <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 text-sm">
+      <div><dt class="text-muted">Agents tracked</dt><dd id="stat-agents" class="text-2xl font-semibold num">–</dd></div>
+      <div><dt class="text-muted">Categories</dt><dd id="stat-cats" class="text-2xl font-semibold num">–</dd></div>
+      <div><dt class="text-muted">Top score</dt><dd id="stat-top" class="text-2xl font-semibold num text-signal">–</dd></div>
+    </dl>
+  </section>
+
+  <section id="leaderboard" class="max-w-6xl mx-auto px-5 pb-16">
+    <div class="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4 mb-4">
+      <label class="relative flex-1 max-w-md">
+        <span class="sr-only">Search agents</span>
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Search by name, vendor or use case" class="w-full bg-panel border border-line rounded-lg pl-9 pr-3 py-2.5 text-sm placeholder:text-muted/70 focus:border-signal/60 focus:outline-none">
+      </label>
+      <div id="chips" class="chips flex gap-2 overflow-x-auto -mx-5 px-5 lg:mx-0 lg:px-0" role="group" aria-label="Filter by category"></div>
+      <label class="flex items-center gap-2 text-sm text-muted lg:ml-auto shrink-0">
+        Sort
+        <select id="sort" class="bg-panel border border-line rounded-lg px-3 py-2 text-text text-sm focus:border-signal/60 focus:outline-none">
+          <option value="rank">Rank</option>
+          <option value="score">Score</option>
+          <option value="price">Lowest monthly cost</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Desktop table -->
+    <div class="hidden md:block border border-line rounded-xl overflow-hidden bg-panel/60">
+      <table class="w-full text-sm">
+        <thead class="text-muted text-left border-b border-line bg-panel">
+          <tr>
+            <th scope="col" class="font-medium py-3 pl-5 pr-2 w-20">Rank</th>
+            <th scope="col" class="font-medium py-3 px-3">Agent</th>
+            <th scope="col" class="font-medium py-3 px-3">Category</th>
+            <th scope="col" class="font-medium py-3 px-3 w-56">Score</th>
+            <th scope="col" class="font-medium py-3 px-3">Pricing</th>
+            <th scope="col" class="py-3 pr-5 pl-3"><span class="sr-only">Link</span></th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Mobile cards -->
+    <ol id="cards" class="md:hidden space-y-3"></ol>
+
+    <div id="empty" class="hidden border border-dashed border-line rounded-xl p-10 text-center">
+      <p class="text-text font-medium">No agents match these filters.</p>
+      <p class="text-muted text-sm mt-1">Try a broader search or another category.</p>
+      <button id="clear" class="mt-4 text-sm px-4 py-2 rounded-lg border border-line hover:border-signal/60">Clear filters</button>
+    </div>
+  </section>
+
+  <section id="methodology" class="border-t border-line/70">
+    <div class="max-w-6xl mx-auto px-5 py-16 grid md:grid-cols-[1fr_1.2fr] gap-10">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">How the score works</h2>
+        <p class="mt-4 text-muted leading-relaxed max-w-md">Every agent runs the same set of realistic tasks for its category. We record whether the task was completed, how often it fails, how long it takes and what it costs. The weighted result is a score out of 100. Rankings are only compared within the same methodology version.</p>
+        <p class="mt-3 text-sm text-muted">Methodology version <span id="method-version" class="text-text num">–</span></p>
+      </div>
+      <ul id="weights" class="space-y-5 self-center"></ul>
+    </div>
+  </section>
+
+  <section id="disclosure" class="border-t border-line/70">
+    <div class="max-w-6xl mx-auto px-5 py-12 max-w-3xl">
+      <h2 class="text-lg font-semibold">Affiliate disclosure</h2>
+      <p class="mt-2 text-muted leading-relaxed text-sm">Some links are partner links, marked <span class="text-partner">Partner link</span>. If you sign up through one, we may earn a commission at no extra cost to you. Partnerships never affect scores or rank order. Agents without a partner programme are ranked the same way.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-line/70">
+  <div class="max-w-6xl mx-auto px-5 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-muted">
+    <span>© <span id="year"></span> AgentRankings.ai</span>
+    <span>Data refreshes daily. Vendors can request a correction via the contact page.</span>
+  </div>
+</footer>
+
+<script id="fallback-data" type="application/json">{"meta": {"siteName": "AgentRankings.ai", "lastUpdated": "2026-10-31T06:00:00Z", "isSampleData": true, "currency": "USD", "methodologyVersion": "0.1", "scoreWeights": {"taskSuccess": 40, "reliability": 25, "costEfficiency": 20, "speed": 15}}, "categories": [{"id": "coding", "label": "Coding"}, {"id": "support", "label": "Customer support"}, {"id": "research", "label": "Research"}, {"id": "sales", "label": "Sales"}, {"id": "data", "label": "Data analysis"}, {"id": "ops", "label": "Workflow automation"}], "agents": [{"id": "forgeline", "name": "Forgeline", "vendor": "Forgeline Labs", "category": "coding", "rank": 1, "previousRank": 2, "score": 91.4, "scoreBreakdown": {"taskSuccess": 94, "reliability": 90, "costEfficiency": 86, "speed": 93}, "pricing": {"model": "per_seat", "amount": 40, "unit": "seat / month", "display": "$40 / seat / mo", "monthlyEstimate": 40, "hasFreeTier": false}, "bestFor": "Engineering teams shipping multi-file changes from tickets", "pros": ["Completes long multi-step tasks without hand-holding", "Opens clean, reviewable pull requests", "Strong test-writing habits"], "cons": ["No self-hosted option", "Struggles with very large monorepos"], "websiteUrl": "https://example.com/forgeline", "affiliateUrl": "https://example.com/forgeline?ref=agentrankings", "isAffiliate": true, "lastVerified": "2026-10-31"}, {"id": "relay-desk", "name": "Relay Desk", "vendor": "Relay Systems", "category": "support", "rank": 2, "previousRank": 1, "score": 88.2, "scoreBreakdown": {"taskSuccess": 89, "reliability": 92, "costEfficiency": 84, "speed": 85}, "pricing": {"model": "per_outcome", "amount": 0.9, "unit": "resolved ticket", "display": "$0.90 / resolved ticket", "monthlyEstimate": 450, "hasFreeTier": true}, "bestFor": "Support teams handling 500+ tickets a month", "pros": ["Only charges for resolved tickets", "Hands off to humans cleanly", "Good multilingual coverage"], "cons": ["Setup takes a week of tuning", "Weak on refunds that need judgement"], "websiteUrl": "https://example.com/relay-desk", "affiliateUrl": "https://example.com/relay-desk?ref=agentrankings", "isAffiliate": true, "lastVerified": "2026-10-30"}, {"id": "quillmark", "name": "Quillmark", "vendor": "Quillmark AI", "category": "research", "rank": 3, "previousRank": 3, "score": 86.7, "scoreBreakdown": {"taskSuccess": 88, "reliability": 87, "costEfficiency": 85, "speed": 84}, "pricing": {"model": "usage", "amount": 15, "unit": "1M tokens", "display": "$15 / 1M tokens", "monthlyEstimate": 120, "hasFreeTier": true}, "bestFor": "Market and competitor research with cited sources", "pros": ["Cites every claim", "Handles PDFs and spreadsheets well", "Pay only for what you use"], "cons": ["Costs are hard to predict", "Slower on very broad questions"], "websiteUrl": "https://example.com/quillmark", "affiliateUrl": null, "isAffiliate": false, "lastVerified": "2026-10-29"}, {"id": "cadence-sdr", "name": "Cadence SDR", "vendor": "Cadence", "category": "sales", "rank": 4, "previousRank": 6, "score": 83.9, "scoreBreakdown": {"taskSuccess": 85, "reliability": 84, "costEfficiency": 80, "speed": 86}, "pricing": {"model": "flat", "amount": 499, "unit": "month", "display": "$499 / mo", "monthlyEstimate": 499, "hasFreeTier": false}, "bestFor": "Outbound prospecting for B2B teams without a full SDR team", "pros": ["Writes genuinely personalised first lines", "Syncs with major CRMs", "Books meetings directly"], "cons": ["Expensive for small lists", "Needs careful deliverability setup"], "websiteUrl": "https://example.com/cadence-sdr", "affiliateUrl": "https://example.com/cadence-sdr?ref=agentrankings", "isAffiliate": true, "lastVerified": "2026-10-31"}, {"id": "tessellate", "name": "Tessellate", "vendor": "Tessellate Data", "category": "data", "rank": 5, "previousRank": 4, "score": 82.1, "scoreBreakdown": {"taskSuccess": 84, "reliability": 83, "costEfficiency": 81, "speed": 77}, "pricing": {"model": "per_seat", "amount": 25, "unit": "seat / month", "display": "$25 / seat / mo", "monthlyEstimate": 25, "hasFreeTier": true}, "bestFor": "Answering business questions directly from your warehouse", "pros": ["Writes correct SQL on messy schemas", "Shows its working", "Generous free tier"], "cons": ["Charts are basic", "Read-only, cannot fix bad data"], "websiteUrl": "https://example.com/tessellate", "affiliateUrl": "https://example.com/tessellate?ref=agentrankings", "isAffiliate": true, "lastVerified": "2026-10-28"}, {"id": "patchwork", "name": "Patchwork", "vendor": "Patchwork Ops", "category": "ops", "rank": 6, "previousRank": 5, "score": 79.5, "scoreBreakdown": {"taskSuccess": 80, "reliability": 78, "costEfficiency": 88, "speed": 72}, "pricing": {"model": "usage", "amount": 0.02, "unit": "task run", "display": "$0.02 / task run", "monthlyEstimate": 60, "hasFreeTier": true}, "bestFor": "Back-office tasks across email, sheets and internal tools", "pros": ["Very cheap per run", "Connects to 300+ apps", "Plain-language setup"], "cons": ["Retries can fail silently", "Limited audit logs"], "websiteUrl": "https://example.com/patchwork", "affiliateUrl": null, "isAffiliate": false, "lastVerified": "2026-10-27"}, {"id": "lumen-review", "name": "Lumen Review", "vendor": "Lumen", "category": "coding", "rank": 7, "previousRank": null, "score": 77.8, "scoreBreakdown": {"taskSuccess": 76, "reliability": 81, "costEfficiency": 83, "speed": 70}, "pricing": {"model": "per_seat", "amount": 19, "unit": "seat / month", "display": "$19 / seat / mo", "monthlyEstimate": 19, "hasFreeTier": true}, "bestFor": "Automated code review on every pull request", "pros": ["Catches real bugs, few false alarms", "Free for open source", "Fast to install"], "cons": ["Review only, does not write code", "Comments can be verbose"], "websiteUrl": "https://example.com/lumen-review", "affiliateUrl": "https://example.com/lumen-review?ref=agentrankings", "isAffiliate": true, "lastVerified": "2026-10-31"}, {"id": "harbor-voice", "name": "Harbor Voice", "vendor": "Harbor", "category": "support", "rank": 8, "previousRank": 7, "score": 74.3, "scoreBreakdown": {"taskSuccess": 75, "reliability": 76, "costEfficiency": 70, "speed": 76}, "pricing": {"model": "per_minute", "amount": 0.12, "unit": "minute", "display": "$0.12 / min", "monthlyEstimate": 300, "hasFreeTier": false}, "bestFor": "Phone support and appointment booking", "pros": ["Natural-sounding voice", "Books into common calendars", "24/7 coverage"], "cons": ["Struggles with heavy accents", "Per-minute costs add up"], "websiteUrl": "https://example.com/harbor-voice", "affiliateUrl": null, "isAffiliate": false, "lastVerified": "2026-10-26"}]}</script>
+<script>
+(function () {
+  const state = { data: null, query: '', category: 'all', sort: 'rank', open: new Set() };
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const safeUrl = (u) => (typeof u === 'string' && /^https?:\/\//i.test(u)) ? u : null;
+
+  async function load() {
+    try {
+      const res = await fetch('data/agents.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return await res.json();
+    } catch (e) {
+      return JSON.parse($('fallback-data').textContent);
+    }
+  }
+
+  const catLabel = (id) => (state.data.categories.find((c) => c.id === id) || {}).label || id;
+
+  function meter(score) {
+    const filled = score / 5;
+    let html = '';
+    for (let i = 0; i < 20; i++) {
+      const cls = i < Math.floor(filled) ? 'on' : (i < filled ? 'half' : '');
+      html += `<span class="${cls}"></span>`;
+    }
+    return `<div class="meter" aria-hidden="true">${html}</div>`;
+  }
+
+  function movement(a) {
+    if (a.previousRank == null) return '<span class="text-[11px] font-semibold text-signal">New</span>';
+    const d = a.previousRank - a.rank;
+    if (d > 0) return `<span class="text-xs text-up num" title="Up ${d} since last update">▲${d}</span>`;
+    if (d < 0) return `<span class="text-xs text-down num" title="Down ${-d} since last update">▼${-d}</span>`;
+    return '<span class="text-xs text-muted" title="No change">–</span>';
+  }
+
+  function cta(a, full) {
+    const aff = a.isAffiliate && safeUrl(a.affiliateUrl);
+    const href = aff || safeUrl(a.websiteUrl);
+    if (!href) return '';
+    const rel = aff ? 'sponsored noopener' : 'noopener';
+    const w = full ? 'w-full justify-center' : '';
+    return `<div class="flex ${full ? 'flex-col' : 'flex-col items-end'} gap-1.5">
+      <a href="${esc(href)}" target="_blank" rel="${rel}" data-agent="${esc(a.id)}" class="out inline-flex ${w} items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-semibold bg-signal text-ink hover:bg-white transition-colors whitespace-nowrap">Visit ${esc(a.name)}</a>
+      ${aff ? '<span class="text-[11px] text-partner">Partner link</span>' : ''}
+    </div>`;
+  }
+
+  function details(a) {
+    const w = state.data.meta.scoreWeights || {};
+    const labels = { taskSuccess: 'Task success', reliability: 'Reliability', costEfficiency: 'Cost efficiency', speed: 'Speed' };
+    const bars = Object.keys(labels).map((k) => {
+      const v = (a.scoreBreakdown || {})[k];
+      if (v == null) return '';
+      return `<div><div class="flex justify-between text-xs mb-1"><span class="text-muted">${labels[k]}${w[k] ? ` <span class="opacity-60">(${w[k]}%)</span>` : ''}</span><span class="num">${v}</span></div><div class="bar"><i style="width:${Math.max(0, Math.min(100, v))}%"></i></div></div>`;
+    }).join('');
+    const list = (items, mark, cls) => (items || []).map((t) => `<li class="flex gap-2"><span class="${cls} shrink-0">${mark}</span><span>${esc(t)}</span></li>`).join('');
+    return `<div class="grid sm:grid-cols-3 gap-6 text-sm">
+      <div><h4 class="text-muted text-xs mb-2">Strengths</h4><ul class="space-y-1.5">${list(a.pros, '+', 'text-up')}</ul></div>
+      <div><h4 class="text-muted text-xs mb-2">Weaknesses</h4><ul class="space-y-1.5">${list(a.cons, '−', 'text-down')}</ul></div>
+      <div class="space-y-3">${bars}</div>
+    </div>
+    <p class="mt-4 text-xs text-muted">${a.bestFor ? `Best for: <span class="text-text">${esc(a.bestFor)}</span>. ` : ''}${a.lastVerified ? `Last verified <span class="num">${esc(a.lastVerified)}</span>.` : ''}${a.pricing && a.pricing.hasFreeTier ? ' Free tier available.' : ''}</p>`;
+  }
+
+  function visible() {
+    const q = state.query.trim().toLowerCase();
+    let list = state.data.agents.filter((a) => {
+      if (state.category !== 'all' && a.category !== state.category) return false;
+      if (!q) return true;
+      return [a.name, a.vendor, catLabel(a.category), a.bestFor].join(' ').toLowerCase().includes(q);
+    });
+    const price = (a) => (a.pricing && a.pricing.monthlyEstimate != null) ? a.pricing.monthlyEstimate : Infinity;
+    const sorters = { rank: (a, b) => a.rank - b.rank, score: (a, b) => b.score - a.score, price: (a, b) => price(a) - price(b) };
+    return list.sort(sorters[state.sort] || sorters.rank);
+  }
+
+  function render() {
+    const list = visible();
+    $('empty').classList.toggle('hidden', list.length > 0);
+
+    $('table-body').innerHTML = list.map((a) => {
+      const open = state.open.has(a.id);
+      return `<tr class="${a.rank <= 3 ? 'row-top ' : ''}border-b border-line/60 hover:bg-raised/40">
+        <td class="py-4 pl-5 pr-2"><div class="flex items-center gap-2"><span class="text-lg font-bold num w-6">${a.rank}</span>${movement(a)}</div></td>
+        <td class="py-4 px-3">
+          <button class="toggle text-left group" data-id="${esc(a.id)}" aria-expanded="${open}" aria-controls="d-${esc(a.id)}">
+            <span class="block font-semibold text-base group-hover:text-signal">${esc(a.name)}</span>
+            <span class="block text-xs text-muted">${esc(a.vendor)} <span class="ml-1 opacity-70">${open ? 'Hide details' : 'Details'}</span></span>
+          </button>
+        </td>
+        <td class="py-4 px-3 text-muted">${esc(catLabel(a.category))}</td>
+        <td class="py-4 px-3"><div class="flex items-center gap-3">${meter(a.score)}<span class="font-semibold num">${a.score.toFixed(1)}</span></div></td>
+        <td class="py-4 px-3"><span class="num">${esc(a.pricing && a.pricing.display)}</span></td>
+        <td class="py-4 pr-5 pl-3 text-right">${cta(a, false)}</td>
+      </tr>
+      <tr id="d-${esc(a.id)}" class="${open ? '' : 'hidden'} border-b border-line/60 bg-ink/40"><td></td><td colspan="5" class="py-5 pr-5 pl-3">${open ? details(a) : ''}</td></tr>`;
+    }).join('');
+
+    $('cards').innerHTML = list.map((a) => {
+      const open = state.open.has(a.id);
+      return `<li class="border border-line rounded-xl bg-panel/70 p-4 ${a.rank <= 3 ? 'border-l-2 border-l-signal' : ''}">
+        <div class="flex items-start justify-between gap-3">
+          <div class="flex items-baseline gap-3">
+            <span class="text-2xl font-bold num">${a.rank}</span>
+            <div><h3 class="font-semibold text-base leading-tight">${esc(a.name)}</h3><p class="text-xs text-muted">${esc(catLabel(a.category))}</p></div>
+          </div>
+          ${movement(a)}
+        </div>
+        <div class="mt-4 flex items-center gap-3">${meter(a.score)}<span class="font-semibold num">${a.score.toFixed(1)}</span></div>
+        <p class="mt-2 text-sm"><span class="text-muted">Pricing</span> <span class="num">${esc(a.pricing && a.pricing.display)}</span></p>
+        <button class="toggle mt-3 text-sm text-signal" data-id="${esc(a.id)}" aria-expanded="${open}">${open ? 'Hide details' : 'Strengths, weaknesses and breakdown'}</button>
+        ${open ? `<div class="mt-4 pt-4 border-t border-line/60">${details(a)}</div>` : ''}
+        <div class="mt-4">${cta(a, true)}</div>
+      </li>`;
+    }).join('');
+  }
+
+  function renderChips() {
+    const cats = [{ id: 'all', label: 'All' }].concat(state.data.categories);
+    $('chips').innerHTML = cats.map((c) => {
+      const on = state.category === c.id;
+      return `<button data-cat="${esc(c.id)}" aria-pressed="${on}" class="chip shrink-0 text-sm px-3 py-1.5 rounded-full border transition-colors ${on ? 'border-signal text-signal bg-signal/10' : 'border-line text-muted hover:text-text'}">${esc(c.label)}</button>`;
+    }).join('');
+  }
+
+  function renderMeta() {
+    const m = state.data.meta || {};
+    const d = m.lastUpdated ? new Date(m.lastUpdated) : null;
+    if (d && !isNaN(d)) { $('updated').textContent = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); $('updated').setAttribute('datetime', m.lastUpdated); }
+    $('sample-banner').classList.toggle('hidden', !m.isSampleData);
+    $('stat-agents').textContent = state.data.agents.length;
+    $('stat-cats').textContent = state.data.categories.length;
+    $('stat-top').textContent = Math.max(...state.data.agents.map((a) => a.score)).toFixed(1);
+    $('method-version').textContent = m.methodologyVersion || '–';
+    $('year').textContent = new Date().getFullYear();
+    const labels = { taskSuccess: ['Task success', 'Did the agent finish the job correctly?'], reliability: ['Reliability', 'How often it fails, stalls or needs rescuing.'], costEfficiency: ['Cost efficiency', 'Real cost per completed task.'], speed: ['Speed', 'Time from instruction to finished result.'] };
+    $('weights').innerHTML = Object.entries(m.scoreWeights || {}).map(([k, v]) => `<li>
+      <div class="flex justify-between items-baseline"><span class="font-semibold">${esc((labels[k] || [k])[0])}</span><span class="num text-signal font-semibold">${v}%</span></div>
+      <div class="bar mt-2"><i style="width:${v}%"></i></div>
+      <p class="text-sm text-muted mt-1.5">${esc((labels[k] || ['', ''])[1])}</p></li>`).join('');
+  }
+
+  function structuredData() {
+    const ld = {
+      '@context': 'https://schema.org', '@type': 'ItemList', name: 'AI agent rankings',
+      itemListElement: state.data.agents.slice().sort((a, b) => a.rank - b.rank).map((a) => ({
+        '@type': 'ListItem', position: a.rank,
+        item: { '@type': 'SoftwareApplication', name: a.name, applicationCategory: 'BusinessApplication', publisher: a.vendor, url: a.websiteUrl || undefined }
+      }))
+    };
+    const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(ld); document.head.appendChild(s);
+  }
+
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('.toggle');
+    if (t) { const id = t.dataset.id; state.open.has(id) ? state.open.delete(id) : state.open.add(id); render(); return; }
+    const c = e.target.closest('.chip');
+    if (c) { state.category = c.dataset.cat; renderChips(); render(); return; }
+    if (e.target.closest('#clear')) { state.query = ''; state.category = 'all'; $('search').value = ''; renderChips(); render(); }
+  });
+  $('search').addEventListener('input', (e) => { state.query = e.target.value; render(); });
+  $('sort').addEventListener('change', (e) => { state.sort = e.target.value; render(); });
+
+  load().then((data) => { state.data = data; renderMeta(); renderChips(); render(); structuredData(); });
+})();
+</script>
+</body>
+</html>
