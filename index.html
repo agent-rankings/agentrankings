@@ -65,10 +65,12 @@
   .card h3 { margin-top: 36px; font-size: 32px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
   .card .vendor { color: var(--muted); font-size: 15px; margin-top: 4px; }
   .card .best { margin-top: 18px; }
-  .score { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; align-items: flex-end; gap: 16px; }
+  .score { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
   .score .num { font-size: 48px; font-weight: 300; letter-spacing: -.04em; line-height: .9; }
   .score .num small { font-size: 20px; letter-spacing: 0; margin-left: 2px; }
-  .score .how { font-size: 13px; line-height: 1.4; color: var(--muted); }
+  .score .num .pm { font-size: 15px; color: var(--muted); margin-left: 8px; letter-spacing: 0; }
+  .score .how { display: block; margin-top: 10px; font-size: 13px; line-height: 1.45; color: var(--muted); }
+  .score .cost { color: var(--text); }
   .score .how a { color: var(--muted); }
   .score .how a:hover { color: var(--text); }
   .score.none { display: block; font-size: 13px; color: var(--muted); }
@@ -130,7 +132,9 @@
       </div>
       <div>
         <p class="label">How the coding score works</p>
-        <p>Method v1. The score is the share of the 66 <a href="https://snorkel.ai/leaderboard/terminal-bench/" target="_blank" rel="noopener">Terminal-Bench 4.0</a> tasks the agent solved in its best published run, shown with the model and effort setting it used. Terminal-Bench is an independent benchmark, run by Harbor and the Laude Institute, in which agents write and debug code and configure systems in a real terminal. Agents without a published result are listed without a score, after those with one.</p>
+        <p>Method v1.1. The score is the share of the 66 <a href="https://snorkel.ai/leaderboard/terminal-bench/" target="_blank" rel="noopener">Terminal-Bench 4.0</a> tasks the agent solved in its best published run, with the model and effort setting it used and the ± margin between runs. When two runs score the same, we show the cheaper one.</p>
+        <p>Next to each score is what that full test run cost, as published. It is not what you will pay on a subscription, but it shows how efficiently an agent reaches its result.</p>
+        <p>Terminal-Bench is an independent benchmark, run by Harbor and the Laude Institute, in which agents write and debug code and configure systems in a real terminal. Agents without a published result are listed without a score, after those with one.</p>
       </div>
       <div>
         <p class="label">Other categories</p>
@@ -166,9 +170,11 @@
     const b = a.benchmark;
     if (b && typeof b.score === 'number') {
       const src = safeUrl(b.sourceUrl);
+      const cost = typeof b.runCost === 'number'
+        ? `<br><span class="cost">Full test run cost $${(b.runCost / 1000).toFixed(1)}k</span>` : '';
       return `<div class="score">
-        <span class="num">${b.score.toFixed(1)}<small>%${typeof b.margin === 'number' ? ` ±${b.margin}` : ''}</small></span>
-        <span class="how">of ${esc(b.name)} tasks solved<br>with ${esc(b.model)}${src ? ` · <a href="${esc(src)}" target="_blank" rel="noopener">Source</a>` : ''}</span>
+        <span class="num">${b.score.toFixed(1)}<small>%</small>${typeof b.margin === 'number' ? `<span class="pm">±${b.margin}</span>` : ''}</span>
+        <span class="how">of ${esc(b.name)} tasks solved with ${esc(b.model)}${src ? ` · <a href="${esc(src)}" target="_blank" rel="noopener">Source</a>` : ''}${cost}</span>
       </div>`;
     }
     return scored(a.category) ? '<p class="score none">No public benchmark result yet, so no score.</p>' : '';

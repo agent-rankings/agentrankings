@@ -5,7 +5,7 @@
   },
   "methods": {
     "coding": {
-      "version": "1",
+      "version": "1.1",
       "benchmark": "Terminal-Bench 4.0",
       "sourceUrl": "https://snorkel.ai/leaderboard/terminal-bench/",
       "tasks": 66,
@@ -61,7 +61,9 @@
         "score": 64.8,
         "model": "Claude Opus 5.5, max effort",
         "sourceUrl": "https://snorkel.ai/leaderboard/terminal-bench/",
-        "checked": "2026-11-01"
+        "checked": "2026-11-01",
+        "margin": 3.1,
+        "runCost": 4700
       }
     },
     {
@@ -132,9 +134,11 @@
       "benchmark": {
         "name": "Terminal-Bench 4.0",
         "score": 58.2,
-        "model": "GPT-6 Astra, max effort",
+        "model": "GPT-6.1 Sol, max effort",
         "sourceUrl": "https://snorkel.ai/leaderboard/terminal-bench/",
-        "checked": "2026-11-01"
+        "checked": "2026-11-01",
+        "margin": 3.1,
+        "runCost": 600
       }
     },
     {
