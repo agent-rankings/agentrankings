@@ -54,6 +54,8 @@ def validate(data):
                 errors.append(f"{name}: has a benchmark but its category has no method")
             if not isinstance(b.get("score"), (int, float)) or not 0 <= b["score"] <= 100:
                 errors.append(f"{name}: benchmark.score must be a number from 0 to 100")
+            if "margin" in b and (not isinstance(b["margin"], (int, float)) or b["margin"] < 0):
+                errors.append(f"{name}: benchmark.margin must be a positive number")
             for field in ("name", "model", "sourceUrl", "checked"):
                 if not b.get(field):
                     errors.append(f"{name}: benchmark missing '{field}'")

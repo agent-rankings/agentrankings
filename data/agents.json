@@ -7,7 +7,9 @@
     "coding": {
       "version": "1",
       "benchmark": "Terminal-Bench 4.0",
-      "sourceUrl": "https://snorkel.ai/leaderboard/terminal-bench/"
+      "sourceUrl": "https://snorkel.ai/leaderboard/terminal-bench/",
+      "tasks": 66,
+      "released": "2026-08"
     }
   },
   "categories": [
@@ -57,7 +59,7 @@
       "benchmark": {
         "name": "Terminal-Bench 4.0",
         "score": 64.8,
-        "model": "Claude Opus 5.5",
+        "model": "Claude Opus 5.5, max effort",
         "sourceUrl": "https://snorkel.ai/leaderboard/terminal-bench/",
         "checked": "2026-11-01"
       }
