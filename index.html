@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI Agents Worth Knowing | AgentRankings.ai</title>
-<meta name="description" content="A short, hand-picked list of AI agents for coding, customer support, research and admin work, with honest strengths, weaknesses and starting prices.">
+<meta name="description" content="A short, hand-picked list of AI agents for coding, customer support, research, admin and sales. Honest strengths, weaknesses, starting prices and independent benchmark scores with sources.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://agentrankings.ai/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://agentrankings.ai/">
@@ -64,6 +65,13 @@
   .card h3 { margin-top: 36px; font-size: 32px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
   .card .vendor { color: var(--muted); font-size: 15px; margin-top: 4px; }
   .card .best { margin-top: 18px; }
+  .score { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; align-items: flex-end; gap: 16px; }
+  .score .num { font-size: 48px; font-weight: 300; letter-spacing: -.04em; line-height: .9; }
+  .score .num small { font-size: 20px; letter-spacing: 0; margin-left: 2px; }
+  .score .how { font-size: 13px; line-height: 1.4; color: var(--muted); }
+  .score .how a { color: var(--muted); }
+  .score .how a:hover { color: var(--text); }
+  .score.none { display: block; font-size: 13px; color: var(--muted); }
   .card ul.notes { list-style: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 15px; display: grid; gap: 6px; }
   .card ul.notes li { display: grid; grid-template-columns: 18px 1fr; color: #4A4844; }
   .card .foot { margin-top: auto; padding-top: 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
@@ -102,7 +110,7 @@
   <section class="hero">
     <p class="label">Index · Updated <time id="updated">–</time></p>
     <h1>AI agents worth knowing.</h1>
-    <p class="lede">A short, hand-picked list of agents that do real work. What each is good at, where it falls short, and what it costs to start.</p>
+    <p class="lede">A short, hand-picked list of agents that do real work. Strengths, weaknesses, prices and, where one exists, an independent score.</p>
   </section>
 
   <section id="agents">
@@ -114,15 +122,19 @@
 
   <section id="about" class="about">
     <p class="label">About</p>
-    <p class="big">An honest shortlist today. A transparent score tomorrow.</p>
+    <p class="big">Scores come from independent benchmarks, with sources. Where there is no source, there is no score.</p>
     <div class="cols">
       <div>
         <p class="label">How we choose</p>
-        <p>We list agents that are widely used, actively developed and clearly useful for a specific job. Within each category they appear in no particular order.</p>
+        <p>We list agents that are widely used, actively developed and clearly useful for a specific job. Facts and prices are checked by hand, and each listing is re-checked about once a month.</p>
       </div>
       <div>
-        <p class="label">What comes next</p>
-        <p>We are building a scoring method per category, combining public benchmarks with our own test tasks. Every source and weight will be published here.</p>
+        <p class="label">How the coding score works</p>
+        <p>Method v1. The score is the share of <a href="https://snorkel.ai/leaderboard/terminal-bench/" target="_blank" rel="noopener">Terminal-Bench 4.0</a> tasks the agent solved in its best published run, with the model it used. Terminal-Bench is an independent benchmark of agents doing real work in a terminal. Agents without a published result are listed without a score, after those with one.</p>
+      </div>
+      <div>
+        <p class="label">Other categories</p>
+        <p>Public benchmarks for support, research, admin and sales mostly test the underlying models, not the products you buy. Until we can measure the products themselves, these categories are listed without scores and in no particular order.</p>
       </div>
       <div>
         <p class="label">Independence</p>
@@ -148,6 +160,20 @@
 
   const catLabel = (id) => (data.categories.find((c) => c.id === id) || {}).label || id;
 
+  const scored = (c) => (data.methods || {})[c];
+
+  function score(a) {
+    const b = a.benchmark;
+    if (b && typeof b.score === 'number') {
+      const src = safeUrl(b.sourceUrl);
+      return `<div class="score">
+        <span class="num">${b.score.toFixed(1)}<small>%</small></span>
+        <span class="how">of ${esc(b.name)} tasks solved<br>with ${esc(b.model)}${src ? ` · <a href="${esc(src)}" target="_blank" rel="noopener">Source</a>` : ''}</span>
+      </div>`;
+    }
+    return scored(a.category) ? '<p class="score none">No public benchmark result yet, so no score.</p>' : '';
+  }
+
   function card(a, i) {
     const url = safeUrl(a.websiteUrl);
     const p = a.pricing || {};
@@ -158,6 +184,7 @@
       <h3>${esc(a.name)}</h3>
       <p class="vendor">${esc(a.vendor)}</p>
       <p class="best">${esc(a.bestFor)}</p>
+      ${score(a)}
       <ul class="notes">${notes}</ul>
       <div class="foot">
         <p class="price">${esc(p.display)}${p.hasFreeTier ? '<small>Free plan available</small>' : ''}</p>
@@ -172,8 +199,27 @@
         ? `<button disabled>${esc(c.label)} · Coming soon</button>`
         : `<button data-cat="${esc(c.id)}" aria-pressed="${category === c.id}">${esc(c.label)}</button>`
     ).join('');
-    const list = data.agents.filter((a) => category === 'all' || a.category === category);
+    const order = data.categories.map((c) => c.id);
+    const val = (a) => (a.benchmark && typeof a.benchmark.score === 'number') ? a.benchmark.score : -1;
+    const list = data.agents
+      .filter((a) => category === 'all' || a.category === category)
+      .map((a, i) => [a, i])
+      .sort(([a, i], [b, j]) => (order.indexOf(a.category) - order.indexOf(b.category)) || (val(b) - val(a)) || (i - j))
+      .map(([a]) => a);
     $('list').innerHTML = list.map(card).join('');
+  }
+
+  function structuredData() {
+    const ld = {
+      '@context': 'https://schema.org', '@type': 'ItemList', name: 'AI agents worth knowing',
+      itemListElement: data.agents.map((a, i) => ({
+        '@type': 'ListItem', position: i + 1,
+        item: { '@type': 'SoftwareApplication', name: a.name, applicationCategory: 'BusinessApplication', url: safeUrl(a.websiteUrl) || undefined, author: { '@type': 'Organization', name: a.vendor } }
+      }))
+    };
+    const s = document.createElement('script');
+    s.type = 'application/ld+json'; s.textContent = JSON.stringify(ld);
+    document.head.appendChild(s);
   }
 
   $('filters').addEventListener('click', (e) => {
@@ -189,6 +235,7 @@
       const u = d.meta && d.meta.lastUpdated ? new Date(d.meta.lastUpdated) : null;
       if (u && !isNaN(u)) { $('updated').textContent = u.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }); $('updated').setAttribute('datetime', d.meta.lastUpdated); }
       render();
+      structuredData();
     })
     .catch(() => { $('status').textContent = 'The list could not be loaded. Please refresh the page.'; $('status').hidden = false; });
 })();
