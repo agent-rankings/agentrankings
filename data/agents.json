@@ -132,7 +132,7 @@
       "benchmark": {
         "name": "Terminal-Bench 4.0",
         "score": 58.2,
-        "model": "GPT-6 Astra",
+        "model": "GPT-6 Astra, max effort",
         "sourceUrl": "https://snorkel.ai/leaderboard/terminal-bench/",
         "checked": "2026-11-01"
       }
