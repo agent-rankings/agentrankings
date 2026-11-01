@@ -130,7 +130,7 @@
       </div>
       <div>
         <p class="label">How the coding score works</p>
-        <p>Method v1. The score is the share of <a href="https://snorkel.ai/leaderboard/terminal-bench/" target="_blank" rel="noopener">Terminal-Bench 4.0</a> tasks the agent solved in its best published run, with the model it used. Terminal-Bench is an independent benchmark of agents doing real work in a terminal. Agents without a published result are listed without a score, after those with one.</p>
+        <p>Method v1. The score is the share of the 66 <a href="https://snorkel.ai/leaderboard/terminal-bench/" target="_blank" rel="noopener">Terminal-Bench 4.0</a> tasks the agent solved in its best published run, shown with the model and effort setting it used. Terminal-Bench is an independent benchmark, run by Harbor and the Laude Institute, in which agents write and debug code and configure systems in a real terminal. Agents without a published result are listed without a score, after those with one.</p>
       </div>
       <div>
         <p class="label">Other categories</p>
@@ -167,7 +167,7 @@
     if (b && typeof b.score === 'number') {
       const src = safeUrl(b.sourceUrl);
       return `<div class="score">
-        <span class="num">${b.score.toFixed(1)}<small>%</small></span>
+        <span class="num">${b.score.toFixed(1)}<small>%${typeof b.margin === 'number' ? ` ±${b.margin}` : ''}</small></span>
         <span class="how">of ${esc(b.name)} tasks solved<br>with ${esc(b.model)}${src ? ` · <a href="${esc(src)}" target="_blank" rel="noopener">Source</a>` : ''}</span>
       </div>`;
     }

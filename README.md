@@ -24,7 +24,8 @@ Actions → Check data → Run workflow.
 
 ## Scoring method
 
-- **Coding, v1:** the share of Terminal-Bench 4.0 tasks the agent solved in its best
-  published run, with the model it used.
+- **Coding, v1:** the share of the 66 Terminal-Bench 4.0 tasks the agent solved in its
+  best published run, with the model and effort setting it used. Add `benchmark.margin`
+  (the ± from the leaderboard) when you have it; the site shows it next to the score.
 - **Other categories:** not scored yet, because public benchmarks there mostly test
   the underlying models, not the products.
