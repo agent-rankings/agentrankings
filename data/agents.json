@@ -1,14 +1,30 @@
 {
   "meta": {
     "siteName": "AgentRankings.ai",
-    "lastUpdated": "2026-11-01",
-    "contactEmail": "hello@agentrankings.ai"
+    "lastUpdated": "2026-11-01"
   },
   "categories": [
-    { "id": "coding", "label": "Coding" },
-    { "id": "support", "label": "Customer support" },
-    { "id": "research", "label": "Research" },
-    { "id": "ops", "label": "Workflow automation" }
+    {
+      "id": "coding",
+      "label": "Coding"
+    },
+    {
+      "id": "support",
+      "label": "Customer support"
+    },
+    {
+      "id": "research",
+      "label": "Research"
+    },
+    {
+      "id": "ops",
+      "label": "Admin & automation"
+    },
+    {
+      "id": "sales",
+      "label": "Sales",
+      "comingSoon": true
+    }
   ],
   "agents": [
     {
@@ -17,9 +33,19 @@
       "vendor": "Anthropic",
       "category": "coding",
       "bestFor": "Developers who want an agent that works directly in their terminal and codebase",
-      "pricing": { "display": "Included with Claude Pro, from $20 / mo", "hasFreeTier": false },
-      "pros": ["Handles multi-file changes and long tasks", "Runs in the terminal, IDE or browser", "Works with your existing git workflow"],
-      "cons": ["Heavy use needs a higher plan", "Best suited to people comfortable with a terminal"],
+      "pricing": {
+        "display": "Included with Claude Pro, from $20 / mo",
+        "hasFreeTier": false
+      },
+      "pros": [
+        "Handles multi-file changes and long tasks",
+        "Runs in the terminal, IDE or browser",
+        "Works with your existing git workflow"
+      ],
+      "cons": [
+        "Heavy use needs a higher plan",
+        "Best suited to people comfortable with a terminal"
+      ],
       "websiteUrl": "https://www.anthropic.com/claude-code"
     },
     {
@@ -28,9 +54,19 @@
       "vendor": "Anysphere",
       "category": "coding",
       "bestFor": "Developers who want an AI-first code editor with an agent built in",
-      "pricing": { "display": "Pro from $20 / mo", "hasFreeTier": true },
-      "pros": ["Familiar editor, based on VS Code", "Choice of several leading models", "Free plan to try it out"],
-      "cons": ["Usage-based credits make costs harder to predict", "Means switching editor"],
+      "pricing": {
+        "display": "Pro from $20 / mo",
+        "hasFreeTier": true
+      },
+      "pros": [
+        "Familiar editor, based on VS Code",
+        "Choice of several leading models",
+        "Free plan to try it out"
+      ],
+      "cons": [
+        "Usage-based credits make costs harder to predict",
+        "Means switching editor"
+      ],
       "websiteUrl": "https://cursor.com"
     },
     {
@@ -39,9 +75,19 @@
       "vendor": "Cognition",
       "category": "coding",
       "bestFor": "Teams that want to hand off well-defined tickets to an autonomous engineer",
-      "pricing": { "display": "Pro from $20 / mo", "hasFreeTier": true },
-      "pros": ["Works asynchronously in its own environment", "Integrates with Slack and issue trackers", "Opens pull requests for review"],
-      "cons": ["Needs clearly scoped tasks to do well", "Plans and limits have changed often"],
+      "pricing": {
+        "display": "Pro from $20 / mo",
+        "hasFreeTier": true
+      },
+      "pros": [
+        "Works asynchronously in its own environment",
+        "Integrates with Slack and issue trackers",
+        "Opens pull requests for review"
+      ],
+      "cons": [
+        "Needs clearly scoped tasks to do well",
+        "Plans and limits have changed often"
+      ],
       "websiteUrl": "https://devin.ai"
     },
     {
@@ -50,9 +96,19 @@
       "vendor": "OpenAI",
       "category": "coding",
       "bestFor": "ChatGPT users who want a coding agent without another subscription",
-      "pricing": { "display": "Included with ChatGPT Plus, from $20 / mo", "hasFreeTier": false },
-      "pros": ["Runs tasks in parallel in the cloud", "Available in ChatGPT, the CLI and IDEs", "No extra subscription for ChatGPT users"],
-      "cons": ["Usage limits depend on your ChatGPT plan", "Cloud tasks need a connected GitHub repo"],
+      "pricing": {
+        "display": "Included with ChatGPT Plus, from $20 / mo",
+        "hasFreeTier": false
+      },
+      "pros": [
+        "Runs tasks in parallel in the cloud",
+        "Available in ChatGPT, the CLI and IDEs",
+        "No extra subscription for ChatGPT users"
+      ],
+      "cons": [
+        "Usage limits depend on your ChatGPT plan",
+        "Cloud tasks need a connected GitHub repo"
+      ],
       "websiteUrl": "https://openai.com/codex"
     },
     {
@@ -61,9 +117,19 @@
       "vendor": "Intercom",
       "category": "support",
       "bestFor": "Support teams that want to resolve common questions automatically",
-      "pricing": { "display": "$0.99 / resolution", "hasFreeTier": false },
-      "pros": ["Pay per resolved conversation", "Learns from your help centre content", "Hands over to human agents"],
-      "cons": ["Helpdesk seats are billed on top", "Costs grow with volume"],
+      "pricing": {
+        "display": "$0.99 / resolution",
+        "hasFreeTier": false
+      },
+      "pros": [
+        "Pay per resolved conversation",
+        "Learns from your help centre content",
+        "Hands over to human agents"
+      ],
+      "cons": [
+        "Helpdesk seats are billed on top",
+        "Costs grow with volume"
+      ],
       "websiteUrl": "https://fin.ai"
     },
     {
@@ -72,9 +138,19 @@
       "vendor": "Perplexity AI",
       "category": "research",
       "bestFor": "Quick, sourced answers and deeper research on any topic",
-      "pricing": { "display": "Pro from $20 / mo", "hasFreeTier": true },
-      "pros": ["Cites its sources", "Fast for everyday questions", "Useful free plan"],
-      "cons": ["Depth varies with the question", "Always check the sources it cites"],
+      "pricing": {
+        "display": "Pro from $20 / mo",
+        "hasFreeTier": true
+      },
+      "pros": [
+        "Cites its sources",
+        "Fast for everyday questions",
+        "Useful free plan"
+      ],
+      "cons": [
+        "Depth varies with the question",
+        "Always check the sources it cites"
+      ],
       "websiteUrl": "https://www.perplexity.ai"
     },
     {
@@ -83,9 +159,19 @@
       "vendor": "OpenAI",
       "category": "research",
       "bestFor": "Long, multi-step research reports with citations",
-      "pricing": { "display": "Included with ChatGPT Plus, from $20 / mo", "hasFreeTier": true },
-      "pros": ["Writes structured reports from many sources", "Works through a question step by step", "Part of a tool many people already use"],
-      "cons": ["Reports can take several minutes", "Monthly limits on paid plans"],
+      "pricing": {
+        "display": "Included with ChatGPT Plus, from $20 / mo",
+        "hasFreeTier": true
+      },
+      "pros": [
+        "Writes structured reports from many sources",
+        "Works through a question step by step",
+        "Part of a tool many people already use"
+      ],
+      "cons": [
+        "Reports can take several minutes",
+        "Monthly limits on paid plans"
+      ],
       "websiteUrl": "https://chatgpt.com"
     },
     {
@@ -94,9 +180,19 @@
       "vendor": "Lindy",
       "category": "ops",
       "bestFor": "Small teams automating email, scheduling and admin work",
-      "pricing": { "display": "From $49.99 / mo", "hasFreeTier": false },
-      "pros": ["Set up agents in plain language", "Connects to common business apps", "Good for inbox and calendar tasks"],
-      "cons": ["Usage allowances can run out", "Complex workflows take tuning"],
+      "pricing": {
+        "display": "From $49.99 / mo",
+        "hasFreeTier": false
+      },
+      "pros": [
+        "Set up agents in plain language",
+        "Connects to common business apps",
+        "Good for inbox and calendar tasks"
+      ],
+      "cons": [
+        "Usage allowances can run out",
+        "Complex workflows take tuning"
+      ],
       "websiteUrl": "https://www.lindy.ai"
     }
   ]
