@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AI Agents Worth Knowing | AgentRankings.ai</title>
+<title>AI Agent Rankings: Benchmark Scores and Prices | AgentRankings.ai</title>
 <meta name="description" content="A short, hand-picked list of AI agents for coding, customer support, research, admin and sales. Honest strengths, weaknesses, starting prices and independent benchmark scores with sources.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://agentrankings.ai/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://agentrankings.ai/">
-<meta property="og:title" content="AI Agents Worth Knowing | AgentRankings.ai">
-<meta property="og:description" content="A short, hand-picked list of AI agents, with honest strengths, weaknesses and starting prices.">
+<meta property="og:title" content="AI Agent Rankings | AgentRankings.ai">
+<meta property="og:description" content="A short, hand-picked list of AI agents with honest strengths, weaknesses, prices and independent benchmark scores.">
 <meta name="theme-color" content="#F2F1EC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
     --bg: #F2F1EC;
     --card: #FFFFFF;
     --text: #232220;
-    --muted: #8B8983;
+    --muted: #6E6C66;
     --line: #DCDAD3;
     --radius: 16px;
     --gutter: clamp(20px, 5vw, 48px);
@@ -62,7 +62,7 @@
   .grid { list-style: none; display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
   .card { background: var(--card); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; }
   .card .meta { display: flex; justify-content: space-between; gap: 12px; }
-  .card h3 { margin-top: 36px; font-size: 32px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
+  .card h2 { margin-top: 36px; font-size: 32px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
   .card .vendor { color: var(--muted); font-size: 15px; margin-top: 4px; }
   .card .best { margin-top: 18px; }
   .score { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
@@ -86,7 +86,7 @@
   .status { padding: 40px 0; color: var(--muted); }
 
   .about { margin-top: clamp(96px, 14vw, 160px); padding: clamp(64px, 10vw, 120px) 0; border-top: 1px solid var(--line); }
-  .about p.big { margin-top: 20px; max-width: 26ch; font-size: clamp(28px, 4vw, 48px); line-height: 1.12; letter-spacing: -.025em; }
+  .about .big { font-weight: 400; margin-top: 20px; max-width: 26ch; font-size: clamp(28px, 4vw, 48px); line-height: 1.12; letter-spacing: -.025em; }
   .about .cols { margin-top: 56px; display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); max-width: 960px; }
   .about .cols p { color: #4A4844; margin-top: 10px; }
 
@@ -118,13 +118,14 @@
   <section id="agents">
     <div id="filters" class="filters" role="group" aria-label="Filter by category"></div>
     <ul id="list" class="grid"></ul>
+    <noscript><p class="status">This list needs JavaScript. Please turn it on to see the agents.</p></noscript>
     <p id="status" class="status" hidden></p>
     <p class="note">Starting prices in USD. Prices change often, so check the vendor's own page before you buy.</p>
   </section>
 
   <section id="about" class="about">
     <p class="label">About</p>
-    <p class="big">Scores come from independent benchmarks, with sources. Where there is no source, there is no score.</p>
+    <h2 class="big">Scores come from independent benchmarks, with sources. Where there is no source, there is no score.</h2>
     <div class="cols">
       <div>
         <p class="label">How we choose</p>
@@ -180,14 +181,32 @@
     return scored(a.category) ? '<p class="score none">No public benchmark result yet, so no score.</p>' : '';
   }
 
-  function card(a, i) {
+  const val = (a) => (a.benchmark && typeof a.benchmark.score === 'number') ? a.benchmark.score : -1;
+
+  // Category order first, then score (highest first), then the order in the data file.
+  function sorted() {
+    const order = data.categories.map((c) => c.id);
+    return data.agents
+      .map((a, i) => [a, i])
+      .sort(([a, i], [b, j]) => (order.indexOf(a.category) - order.indexOf(b.category)) || (val(b) - val(a)) || (i - j))
+      .map(([a]) => a);
+  }
+
+  // Only scored agents get a rank number; unscored lists are in no particular order.
+  function rankOf(a) {
+    if (val(a) < 0) return '';
+    const rank = sorted().filter((x) => x.category === a.category && val(x) >= 0).indexOf(a) + 1;
+    return `No. ${rank}`;
+  }
+
+  function card(a) {
     const url = safeUrl(a.websiteUrl);
     const p = a.pricing || {};
     const notes = (a.pros || []).map((t) => `<li><span>+</span><span>${esc(t)}</span></li>`).join('')
       + (a.cons || []).map((t) => `<li><span>−</span><span>${esc(t)}</span></li>`).join('');
     return `<li class="card">
-      <div class="meta label"><span>${String(i + 1).padStart(3, '0')}</span><span>${esc(catLabel(a.category))}</span></div>
-      <h3>${esc(a.name)}</h3>
+      <div class="meta label"><span>${esc(catLabel(a.category))}</span><span>${rankOf(a)}</span></div>
+      <h2>${esc(a.name)}</h2>
       <p class="vendor">${esc(a.vendor)}</p>
       <p class="best">${esc(a.bestFor)}</p>
       ${score(a)}
@@ -205,20 +224,14 @@
         ? `<button disabled>${esc(c.label)} · Coming soon</button>`
         : `<button data-cat="${esc(c.id)}" aria-pressed="${category === c.id}">${esc(c.label)}</button>`
     ).join('');
-    const order = data.categories.map((c) => c.id);
-    const val = (a) => (a.benchmark && typeof a.benchmark.score === 'number') ? a.benchmark.score : -1;
-    const list = data.agents
-      .filter((a) => category === 'all' || a.category === category)
-      .map((a, i) => [a, i])
-      .sort(([a, i], [b, j]) => (order.indexOf(a.category) - order.indexOf(b.category)) || (val(b) - val(a)) || (i - j))
-      .map(([a]) => a);
+    const list = sorted().filter((a) => category === 'all' || a.category === category);
     $('list').innerHTML = list.map(card).join('');
   }
 
   function structuredData() {
     const ld = {
       '@context': 'https://schema.org', '@type': 'ItemList', name: 'AI agents worth knowing',
-      itemListElement: data.agents.map((a, i) => ({
+      itemListElement: sorted().map((a, i) => ({
         '@type': 'ListItem', position: i + 1,
         item: { '@type': 'SoftwareApplication', name: a.name, applicationCategory: 'BusinessApplication', url: safeUrl(a.websiteUrl) || undefined, author: { '@type': 'Organization', name: a.vendor } }
       }))
