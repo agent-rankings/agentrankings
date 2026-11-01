@@ -4,172 +4,193 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI Agents Worth Knowing | AgentRankings.ai</title>
-<meta name="description" content="A short, hand-picked list of AI agents for coding, customer support, research and workflow automation, with honest strengths, weaknesses and starting prices.">
+<meta name="description" content="A short, hand-picked list of AI agents for coding, customer support, research and admin work, with honest strengths, weaknesses and starting prices.">
 <link rel="canonical" href="https://agentrankings.ai/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://agentrankings.ai/">
 <meta property="og:title" content="AI Agents Worth Knowing | AgentRankings.ai">
 <meta property="og:description" content="A short, hand-picked list of AI agents, with honest strengths, weaknesses and starting prices.">
-<meta name="theme-color" content="#0A0F1F">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#F2F1EC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          ink: '#0A0F1F', panel: '#111933', raised: '#18224A', line: '#24305A',
-          text: '#E7ECF8', muted: '#8A97BC', signal: '#3CE6F6', up: '#4ADE80', down: '#FB7185'
-        },
-        fontFamily: { sans: ['Geist', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] }
-      }
-    }
-  };
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  html { scroll-padding-top: 80px; scroll-behavior: smooth; }
-  body {
-    background:
-      radial-gradient(1200px 500px at 80% -10%, rgba(60,230,246,.08), transparent 60%),
-      radial-gradient(900px 400px at -10% 10%, rgba(180,156,255,.07), transparent 60%),
-      #0A0F1F;
+  :root {
+    --bg: #F2F1EC;
+    --card: #FFFFFF;
+    --text: #232220;
+    --muted: #8B8983;
+    --line: #DCDAD3;
+    --radius: 16px;
+    --gutter: clamp(20px, 5vw, 48px);
   }
-  :focus-visible { outline: 2px solid #3CE6F6; outline-offset: 2px; border-radius: 4px; }
-  .chips::-webkit-scrollbar { display: none; }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400; font-size: 17px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 1px solid var(--text); outline-offset: 3px; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
+  .label { font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+
+  header { position: sticky; top: 0; z-index: 10; background: rgba(242,241,236,.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  header .wrap { height: 72px; display: flex; align-items: center; justify-content: space-between; }
+  .wordmark { font-size: 22px; font-weight: 400; letter-spacing: .02em; text-decoration: none; text-transform: uppercase; }
+  header nav { display: flex; gap: 28px; font-size: 15px; }
+  header nav a { text-decoration: none; }
+  header nav a:hover { color: var(--muted); }
+
+  .hero { padding: clamp(72px, 14vw, 160px) 0 clamp(56px, 9vw, 96px); }
+  h1 { font-size: clamp(40px, 7vw, 88px); font-weight: 400; letter-spacing: -.035em; line-height: 1.02; max-width: 12ch; margin-top: 20px; }
+  .lede { margin-top: 28px; max-width: 34ch; font-size: clamp(20px, 2.2vw, 26px); line-height: 1.35; letter-spacing: -.01em; }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+  .filters button {
+    font: inherit; font-size: 14px; color: var(--text); background: transparent;
+    border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; cursor: pointer;
+  }
+  .filters button:hover { border-color: var(--text); }
+  .filters button[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--bg); }
+  .filters button:disabled { cursor: default; color: var(--muted); border-style: dashed; }
+  .filters button:disabled:hover { border-color: var(--line); }
+
+  .grid { list-style: none; display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+  .card { background: var(--card); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; }
+  .card .meta { display: flex; justify-content: space-between; gap: 12px; }
+  .card h3 { margin-top: 36px; font-size: 32px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
+  .card .vendor { color: var(--muted); font-size: 15px; margin-top: 4px; }
+  .card .best { margin-top: 18px; }
+  .card ul.notes { list-style: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 15px; display: grid; gap: 6px; }
+  .card ul.notes li { display: grid; grid-template-columns: 18px 1fr; color: #4A4844; }
+  .card .foot { margin-top: auto; padding-top: 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .card .price { font-size: 15px; }
+  .card .price small { display: block; color: var(--muted); font-size: 13px; }
+  .pill { display: inline-block; white-space: nowrap; text-decoration: none; font-size: 15px; border: 1px solid var(--text); border-radius: 999px; padding: 9px 20px; transition: background .2s, color .2s; }
+  .pill:hover { background: var(--text); color: var(--bg); }
+
+  .note { margin-top: 24px; font-size: 14px; color: var(--muted); }
+  .status { padding: 40px 0; color: var(--muted); }
+
+  .about { margin-top: clamp(96px, 14vw, 160px); padding: clamp(64px, 10vw, 120px) 0; border-top: 1px solid var(--line); }
+  .about p.big { margin-top: 20px; max-width: 26ch; font-size: clamp(28px, 4vw, 48px); line-height: 1.12; letter-spacing: -.025em; }
+  .about .cols { margin-top: 56px; display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); max-width: 960px; }
+  .about .cols p { color: #4A4844; margin-top: 10px; }
+
+  footer { border-top: 1px solid var(--line); }
+  footer .wrap { padding-top: 28px; padding-bottom: 40px; display: flex; justify-content: space-between; gap: 16px; font-size: 14px; color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .pill { transition: none; } }
 </style>
 </head>
-<body class="text-text font-sans antialiased min-h-screen">
+<body>
 
-<header class="sticky top-0 z-50 border-b border-line/70 bg-ink/85 backdrop-blur-md">
-  <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
-    <a href="/" class="flex items-baseline gap-0.5 text-lg font-bold tracking-tight">
-      <span>AgentRankings</span><span class="text-muted font-medium">.ai</span>
-    </a>
-    <nav class="flex items-center gap-6 text-sm text-muted">
-      <a href="#agents" class="hover:text-text">Agents</a>
-      <a href="#about" class="hover:text-text">How we choose</a>
+<header>
+  <div class="wrap">
+    <a href="/" class="wordmark">Agent Rankings</a>
+    <nav>
+      <a href="#agents">Agents</a>
+      <a href="#about">About</a>
     </nav>
   </div>
 </header>
 
-<main>
-  <section class="max-w-6xl mx-auto px-5 pt-14 pb-8 sm:pt-20">
-    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-[-0.035em] leading-[1.02] max-w-3xl">AI agents worth knowing about.</h1>
-    <p class="mt-5 text-lg text-muted max-w-2xl leading-relaxed">A short, hand-picked list of agents that do real work: writing code, answering customers, researching and running admin tasks. What each is good at, where it falls short, and what it costs to start.</p>
-    <p class="mt-4 text-sm text-muted">Last updated <time id="updated" class="text-text">–</time></p>
+<main class="wrap">
+  <section class="hero">
+    <p class="label">Index · Updated <time id="updated">–</time></p>
+    <h1>AI agents worth knowing.</h1>
+    <p class="lede">A short, hand-picked list of agents that do real work. What each is good at, where it falls short, and what it costs to start.</p>
   </section>
 
-  <section id="agents" class="max-w-6xl mx-auto px-5 pb-16">
-    <div class="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4 mb-5">
-      <label class="relative flex-1 max-w-md">
-        <span class="sr-only">Search agents</span>
-        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="search" type="search" placeholder="Search by name, vendor or use case" class="w-full bg-panel border border-line rounded-lg pl-9 pr-3 py-2.5 text-sm placeholder:text-muted/70 focus:border-signal/60 focus:outline-none">
-      </label>
-      <div id="chips" class="chips flex gap-2 overflow-x-auto -mx-5 px-5 lg:mx-0 lg:px-0" role="group" aria-label="Filter by category"></div>
-    </div>
-
-    <ul id="list" class="grid gap-4 md:grid-cols-2"></ul>
-
-    <div id="empty" class="hidden border border-dashed border-line rounded-xl p-10 text-center">
-      <p class="text-text font-medium">No agents match these filters.</p>
-      <button id="clear" class="mt-4 text-sm px-4 py-2 rounded-lg border border-line hover:border-signal/60">Clear filters</button>
-    </div>
-
-    <p id="error" class="hidden text-muted">The list could not be loaded. Please refresh the page.</p>
-
-    <p class="mt-6 text-xs text-muted">Prices are starting prices in USD and change often. Always check the vendor's own pricing page before you buy.</p>
+  <section id="agents">
+    <div id="filters" class="filters" role="group" aria-label="Filter by category"></div>
+    <ul id="list" class="grid"></ul>
+    <p id="status" class="status" hidden></p>
+    <p class="note">Starting prices in USD. Prices change often, so check the vendor's own page before you buy.</p>
   </section>
 
-  <section id="about" class="border-t border-line/70">
-    <div class="max-w-3xl mx-auto px-5 py-16">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">How we choose</h2>
-      <p class="mt-4 text-muted leading-relaxed">This is an editorial shortlist, not a benchmark. We include agents that are widely used, actively developed and clearly useful for a specific job. Within each category they are listed in no particular order. We have not yet run our own standardised tests; when we do, we will publish the method alongside the results.</p>
-      <p class="mt-4 text-muted leading-relaxed">No vendor pays to be listed, and none of the links on this page earn us money.</p>
+  <section id="about" class="about">
+    <p class="label">About</p>
+    <p class="big">An honest shortlist today. A transparent score tomorrow.</p>
+    <div class="cols">
+      <div>
+        <p class="label">How we choose</p>
+        <p>We list agents that are widely used, actively developed and clearly useful for a specific job. Within each category they appear in no particular order.</p>
+      </div>
+      <div>
+        <p class="label">What comes next</p>
+        <p>We are building a scoring method per category, combining public benchmarks with our own test tasks. Every source and weight will be published here.</p>
+      </div>
+      <div>
+        <p class="label">Independence</p>
+        <p>No vendor pays to be listed, and no link on this page earns us money.</p>
+      </div>
     </div>
   </section>
 </main>
 
-<footer class="border-t border-line/70">
-  <div class="max-w-6xl mx-auto px-5 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-muted">
+<footer>
+  <div class="wrap">
     <span>© <span id="year"></span> AgentRankings.ai</span>
-    <span>Suggestions or corrections: <a id="contact" class="text-text hover:text-signal" href="#"></a></span>
   </div>
 </footer>
 
 <script>
 (function () {
-  const state = { data: null, query: '', category: 'all' };
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const safeUrl = (u) => (typeof u === 'string' && /^https?:\/\//i.test(u)) ? u : null;
-  const catLabel = (id) => (state.data.categories.find((c) => c.id === id) || {}).label || id;
+  let data = null;
+  let category = 'all';
 
-  function card(a) {
+  const catLabel = (id) => (data.categories.find((c) => c.id === id) || {}).label || id;
+
+  function card(a, i) {
     const url = safeUrl(a.websiteUrl);
-    const list = (items, mark, cls) => (items || []).map((t) => `<li class="flex gap-2"><span class="${cls} shrink-0">${mark}</span><span>${esc(t)}</span></li>`).join('');
     const p = a.pricing || {};
-    return `<li class="flex flex-col border border-line rounded-xl bg-panel/70 p-5">
-      <div class="flex items-start justify-between gap-3">
-        <div>
-          <h3 class="font-semibold text-lg leading-tight">${esc(a.name)}</h3>
-          <p class="text-xs text-muted mt-0.5">${esc(a.vendor)} · ${esc(catLabel(a.category))}</p>
-        </div>
-        ${p.hasFreeTier ? '<span class="shrink-0 text-[11px] px-2 py-0.5 rounded-full border border-up/40 text-up">Free plan</span>' : ''}
-      </div>
-      <p class="mt-3 text-sm">${esc(a.bestFor)}</p>
-      <div class="mt-4 grid grid-cols-2 gap-4 text-sm">
-        <ul class="space-y-1.5">${list(a.pros, '+', 'text-up')}</ul>
-        <ul class="space-y-1.5">${list(a.cons, '−', 'text-down')}</ul>
-      </div>
-      <div class="mt-auto pt-5 flex items-center justify-between gap-3">
-        <span class="text-sm text-muted">${esc(p.display)}</span>
-        ${url ? `<a href="${esc(url)}" target="_blank" rel="noopener" class="inline-flex items-center rounded-lg px-3.5 py-2 text-sm font-semibold bg-signal text-ink hover:bg-white transition-colors whitespace-nowrap">Visit ${esc(a.name)}</a>` : ''}
+    const notes = (a.pros || []).map((t) => `<li><span>+</span><span>${esc(t)}</span></li>`).join('')
+      + (a.cons || []).map((t) => `<li><span>−</span><span>${esc(t)}</span></li>`).join('');
+    return `<li class="card">
+      <div class="meta label"><span>${String(i + 1).padStart(3, '0')}</span><span>${esc(catLabel(a.category))}</span></div>
+      <h3>${esc(a.name)}</h3>
+      <p class="vendor">${esc(a.vendor)}</p>
+      <p class="best">${esc(a.bestFor)}</p>
+      <ul class="notes">${notes}</ul>
+      <div class="foot">
+        <p class="price">${esc(p.display)}${p.hasFreeTier ? '<small>Free plan available</small>' : ''}</p>
+        ${url ? `<a class="pill" href="${esc(url)}" target="_blank" rel="noopener">Visit site</a>` : ''}
       </div>
     </li>`;
   }
 
   function render() {
-    const q = state.query.trim().toLowerCase();
-    const list = state.data.agents.filter((a) => {
-      if (state.category !== 'all' && a.category !== state.category) return false;
-      return !q || [a.name, a.vendor, catLabel(a.category), a.bestFor].join(' ').toLowerCase().includes(q);
-    });
+    $('filters').innerHTML = [{ id: 'all', label: 'All' }].concat(data.categories).map((c) =>
+      c.comingSoon
+        ? `<button disabled>${esc(c.label)} · Coming soon</button>`
+        : `<button data-cat="${esc(c.id)}" aria-pressed="${category === c.id}">${esc(c.label)}</button>`
+    ).join('');
+    const list = data.agents.filter((a) => category === 'all' || a.category === category);
     $('list').innerHTML = list.map(card).join('');
-    $('empty').classList.toggle('hidden', list.length > 0);
   }
 
-  function renderChips() {
-    const cats = [{ id: 'all', label: 'All' }].concat(state.data.categories);
-    $('chips').innerHTML = cats.map((c) => {
-      const on = state.category === c.id;
-      return `<button data-cat="${esc(c.id)}" aria-pressed="${on}" class="chip shrink-0 text-sm px-3 py-1.5 rounded-full border transition-colors ${on ? 'border-signal text-signal bg-signal/10' : 'border-line text-muted hover:text-text'}">${esc(c.label)}</button>`;
-    }).join('');
-  }
-
-  function renderMeta() {
-    const m = state.data.meta || {};
-    const d = m.lastUpdated ? new Date(m.lastUpdated) : null;
-    if (d && !isNaN(d)) { $('updated').textContent = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }); $('updated').setAttribute('datetime', m.lastUpdated); }
-    if (m.contactEmail) { $('contact').textContent = m.contactEmail; $('contact').href = 'mailto:' + m.contactEmail; }
-  }
-
-  document.addEventListener('click', (e) => {
-    const c = e.target.closest('.chip');
-    if (c) { state.category = c.dataset.cat; renderChips(); render(); return; }
-    if (e.target.closest('#clear')) { state.query = ''; state.category = 'all'; $('search').value = ''; renderChips(); render(); }
+  $('filters').addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-cat]');
+    if (b) { category = b.dataset.cat; render(); }
   });
-  $('search').addEventListener('input', (e) => { state.query = e.target.value; render(); });
   $('year').textContent = new Date().getFullYear();
 
   fetch('data/agents.json', { cache: 'no-store' })
     .then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-    .then((data) => { state.data = data; renderMeta(); renderChips(); render(); })
-    .catch(() => { $('error').classList.remove('hidden'); });
+    .then((d) => {
+      data = d;
+      const u = d.meta && d.meta.lastUpdated ? new Date(d.meta.lastUpdated) : null;
+      if (u && !isNaN(u)) { $('updated').textContent = u.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }); $('updated').setAttribute('datetime', d.meta.lastUpdated); }
+      render();
+    })
+    .catch(() => { $('status').textContent = 'The list could not be loaded. Please refresh the page.'; $('status').hidden = false; });
 })();
 </script>
 </body>
