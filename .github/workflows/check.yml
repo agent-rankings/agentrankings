@@ -1,0 +1,41 @@
+name: Check data
+
+on:
+  push:
+    paths: ["data/**", "scripts/**", ".github/workflows/check.yml"]
+  pull_request:
+    paths: ["data/**", "scripts/**", ".github/workflows/check.yml"]
+  schedule:
+    # Mondays 12:17 UTC (13:17 in Stockholm in winter): the weekly review.
+    - cron: "17 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate data/agents.json
+        run: python3 scripts/check.py
+
+  weekly-review:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: validate
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the review checklist
+        run: python3 scripts/check.py --report > review.md
+      - name: Open this week's review issue
+        run: |
+          gh label create weekly-review --color C5DEF5 --description "Weekly data review" --force
+          for n in $(gh issue list --label weekly-review --state open --json number -q '.[].number'); do
+            gh issue close "$n" --comment "Replaced by this week's review."
+          done
+          gh issue create --title "Weekly review $(date -u +%F)" --label weekly-review --body-file review.md

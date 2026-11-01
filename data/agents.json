@@ -3,6 +3,13 @@
     "siteName": "AgentRankings.ai",
     "lastUpdated": "2026-11-01"
   },
+  "methods": {
+    "coding": {
+      "version": "1",
+      "benchmark": "Terminal-Bench 4.0",
+      "sourceUrl": "https://snorkel.ai/leaderboard/terminal-bench/"
+    }
+  },
   "categories": [
     {
       "id": "coding",
@@ -22,8 +29,7 @@
     },
     {
       "id": "sales",
-      "label": "Sales",
-      "comingSoon": true
+      "label": "Sales"
     }
   ],
   "agents": [
@@ -46,7 +52,15 @@
         "Heavy use needs a higher plan",
         "Best suited to people comfortable with a terminal"
       ],
-      "websiteUrl": "https://www.anthropic.com/claude-code"
+      "websiteUrl": "https://www.anthropic.com/claude-code",
+      "checked": "2026-11-01",
+      "benchmark": {
+        "name": "Terminal-Bench 4.0",
+        "score": 64.8,
+        "model": "Claude Opus 5.5",
+        "sourceUrl": "https://snorkel.ai/leaderboard/terminal-bench/",
+        "checked": "2026-11-01"
+      }
     },
     {
       "id": "cursor",
@@ -67,7 +81,8 @@
         "Usage-based credits make costs harder to predict",
         "Means switching editor"
       ],
-      "websiteUrl": "https://cursor.com"
+      "websiteUrl": "https://cursor.com",
+      "checked": "2026-11-01"
     },
     {
       "id": "devin",
@@ -88,7 +103,8 @@
         "Needs clearly scoped tasks to do well",
         "Plans and limits have changed often"
       ],
-      "websiteUrl": "https://devin.ai"
+      "websiteUrl": "https://devin.ai",
+      "checked": "2026-11-01"
     },
     {
       "id": "codex",
@@ -109,7 +125,15 @@
         "Usage limits depend on your ChatGPT plan",
         "Cloud tasks need a connected GitHub repo"
       ],
-      "websiteUrl": "https://openai.com/codex"
+      "websiteUrl": "https://openai.com/codex",
+      "checked": "2026-11-01",
+      "benchmark": {
+        "name": "Terminal-Bench 4.0",
+        "score": 58.2,
+        "model": "GPT-6 Astra",
+        "sourceUrl": "https://snorkel.ai/leaderboard/terminal-bench/",
+        "checked": "2026-11-01"
+      }
     },
     {
       "id": "fin",
@@ -130,7 +154,8 @@
         "Helpdesk seats are billed on top",
         "Costs grow with volume"
       ],
-      "websiteUrl": "https://fin.ai"
+      "websiteUrl": "https://fin.ai",
+      "checked": "2026-11-01"
     },
     {
       "id": "perplexity",
@@ -151,7 +176,8 @@
         "Depth varies with the question",
         "Always check the sources it cites"
       ],
-      "websiteUrl": "https://www.perplexity.ai"
+      "websiteUrl": "https://www.perplexity.ai",
+      "checked": "2026-11-01"
     },
     {
       "id": "chatgpt-deep-research",
@@ -172,7 +198,8 @@
         "Reports can take several minutes",
         "Monthly limits on paid plans"
       ],
-      "websiteUrl": "https://chatgpt.com"
+      "websiteUrl": "https://chatgpt.com",
+      "checked": "2026-11-01"
     },
     {
       "id": "lindy",
@@ -193,7 +220,96 @@
         "Usage allowances can run out",
         "Complex workflows take tuning"
       ],
-      "websiteUrl": "https://www.lindy.ai"
+      "websiteUrl": "https://www.lindy.ai",
+      "checked": "2026-11-01"
+    },
+    {
+      "id": "11x-alice",
+      "name": "Alice",
+      "vendor": "11x",
+      "category": "sales",
+      "bestFor": "B2B teams that want outbound prospecting handled end to end",
+      "pricing": {
+        "display": "From $3,750 / mo, billed annually",
+        "hasFreeTier": false
+      },
+      "pros": [
+        "Researches leads and writes personalised outreach",
+        "Priced by number of leads, not emails sent",
+        "Runs continuously without a human SDR"
+      ],
+      "cons": [
+        "Annual commitment",
+        "Too expensive for small teams"
+      ],
+      "websiteUrl": "https://www.11x.ai",
+      "checked": "2026-11-01"
+    },
+    {
+      "id": "artisan-ava",
+      "name": "Ava",
+      "vendor": "Artisan",
+      "category": "sales",
+      "bestFor": "Outbound teams that want a built-in lead database with the agent",
+      "pricing": {
+        "display": "Custom pricing",
+        "hasFreeTier": false
+      },
+      "pros": [
+        "Comes with a large B2B contact database",
+        "Writes and sends multi-step email sequences",
+        "Handles lead research and personalisation"
+      ],
+      "cons": [
+        "No public pricing, annual contracts",
+        "Coverage of niche markets can be thin"
+      ],
+      "websiteUrl": "https://www.artisan.co",
+      "checked": "2026-11-01"
+    },
+    {
+      "id": "aisdr",
+      "name": "AiSDR",
+      "vendor": "AiSDR",
+      "category": "sales",
+      "bestFor": "Smaller sales teams that want an AI SDR with published pricing",
+      "pricing": {
+        "display": "From $250 / mo",
+        "hasFreeTier": false
+      },
+      "pros": [
+        "Transparent, published plans",
+        "Researches each contact before writing",
+        "Low entry price for the category"
+      ],
+      "cons": [
+        "Entry plan covers a limited number of contacts",
+        "Plans and limits have changed often"
+      ],
+      "websiteUrl": "https://aisdr.com",
+      "checked": "2026-11-01"
+    },
+    {
+      "id": "hubspot-prospecting-agent",
+      "name": "Prospecting Agent",
+      "vendor": "HubSpot",
+      "category": "sales",
+      "bestFor": "Teams already running sales in HubSpot",
+      "pricing": {
+        "display": "$1 per recommended lead, plus a HubSpot plan",
+        "hasFreeTier": false
+      },
+      "pros": [
+        "Works inside your HubSpot CRM",
+        "Uses your own customer data for context",
+        "Pay only for leads it recommends"
+      ],
+      "cons": [
+        "Only for HubSpot customers",
+        "Requires a paid HubSpot subscription"
+      ],
+      "websiteUrl": "https://www.hubspot.com/products/sales",
+      "checked": "2026-11-01"
     }
   ]
 }
